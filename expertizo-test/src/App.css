@@ -1,0 +1,18 @@
+.progressbar {
+  margin: 20px 20%;
+  width: 48.8%;
+}
+
+.progressVisualFull {
+  display: flex;
+  height: 6px;
+  margin: 20px 0;
+  width:100%;
+  height:25px;
+  border:1px solid black;
+  border-radius:5px;
+}
+
+.progressVisualPart {
+  transition: width 2s;
+}
