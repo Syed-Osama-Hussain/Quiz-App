@@ -3,6 +3,10 @@
     width:90%;
     border:5px gainsboro solid;
   }
+  
+  .resultText{
+    margin-left:120px;
+  }
 }
 
 
@@ -11,6 +15,39 @@
     width:50%;
     border:5px gainsboro solid;
   }
+
+  .resultText{
+    margin-left:145px;
+  }
+}
+
+.default-btn{
+  border-radius: 5px;
+  background-color: gainsboro;
+  border: 1px solid black;
+  color: black;
+}
+
+.correct-btn{
+  border-radius: 5px;
+  background-color: black;
+  border: 1px solid black;
+  font-weight: bold;
+  color: white;
+}
+
+.wrong-btn{
+  border-radius: 5px;
+  background-color: white;
+  border: 1px solid black;
+  color: black;
+}
+
+.remaining-btn{
+  border-radius: 5px;
+  background-color: rgb(240,240,240);
+  border: 1px solid silver;
+  color: silver;  
 }
 
 
