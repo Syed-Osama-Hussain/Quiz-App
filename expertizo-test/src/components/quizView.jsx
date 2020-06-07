@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import ProgressBar from "./progressBar";
-import questions from "../questions.json";
 import StarRatings from 'react-star-ratings';
+import ProgressBar from "./progressBar";
+// import Button from "./button";
+import questions from "../questions.json";
+
 
 class QuizView extends Component {
 
@@ -17,10 +19,11 @@ class QuizView extends Component {
             },
             {
                 value: 0,
-                color: 'grey'
+                color: 'grey',
+                number:0
             },
             {
-                value: 100,
+                value: 0,
                 color: 'silver'
             }
           ],
@@ -64,17 +67,19 @@ class QuizView extends Component {
    }
 
 
-
    handleAnswerClick = (e) => {
         const { textContent } = e.currentTarget;
         let answerStatus = "";
-        
+        const readings = [...this.state.readings];
+
         if(textContent === this.state.answer){
             answerStatus = "Correct!"
+            readings[1].number += 1;
+            readings[1].value = (readings[1].number/ this.state.currentQuestion) * 100
         }else{
             answerStatus = "Sorry!"
         }
-        this.setState({ answerStatus })
+        this.setState({ answerStatus,readings })
     }
 
     handleNext = () => {
@@ -83,15 +88,18 @@ class QuizView extends Component {
     }
 
     getstatus = () => {
-        return this.state.answerStatus ? <div className="align-center"> <p> {this.state.answerStatus} </p> <button onClick={this.handleNext}>Next Question</button> </div> : "" 
+        return this.state.answerStatus ? <div className="ml-5"> <p className="text-center"> {this.state.answerStatus} </p> <button style={{"margin-left":"28%"}} className="btn btn-secondary" onClick={this.handleNext}>Next Question</button> </div> : "" 
     }
 
   render() {
     return (
-      <div className="container">
-            <h4 className="ml-5"> Question {this.state.currentQuestion} of 20</h4>
-            <br/>
-            <p className="ml-5">{this.state.type}</p>
+      <div className="container mt-5 mb-5" id="mainContainer">
+            
+            <div style={{"border-top":"10px solid darkgray","width":(this.state.currentQuestion/20)*100 + "%" }}> </div>
+
+            <h3 className="ml-5 mt-5"> Question {this.state.currentQuestion} of 20</h3>
+            <p style={{"color":"darkgray" }} className="ml-5 mb-0">{this.state.type}</p>
+
             <div className="ml-5">
             <StarRatings
             rating={this.state.difficulty}
@@ -102,14 +110,17 @@ class QuizView extends Component {
             name='Difficulty'
             />
             </div>
-            <h4 className="ml-5"> {this.state.question}</h4>
+            
+            <h5 className="ml-5 mb-5 mt-4"> {this.state.question}</h5>
             <div className="row">
                 {this.state.options.map(opt => {
-                    return <p key={opt} onClick={this.handleAnswerClick} className="col-6">{opt}</p>
+                    
+                    return (<div className="col-6 mb-5" key={opt}> <button className="ml-5 btn btn-primary" key={opt} onClick={this.handleAnswerClick}>{opt}</button> </div>)
                 })}
             </div>
-                {this.getstatus()}
-            <ProgressBar readings={this.state.readings}/>
+            
+            {this.getstatus()}
+            <ProgressBar readings={this.state.readings} currentQuestion={this.state.currentQuestion}/>
       </div>
     );
   }

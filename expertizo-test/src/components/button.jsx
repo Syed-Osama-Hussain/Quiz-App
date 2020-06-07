@@ -3,9 +3,7 @@ import React from 'react';
 
 function Button({}) {
   return (
-    <div>
-
-    </div>
+      <button key={opt} onClick={this.handleAnswerClick} className="col-6">{opt}</button>
   );
 }
 

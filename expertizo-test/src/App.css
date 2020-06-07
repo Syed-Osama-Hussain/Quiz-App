@@ -1,6 +1,24 @@
+@media (max-width: 480px) {
+  #mainContainer{
+    width:90%;
+    border:5px gainsboro solid;
+  }
+}
+
+
+@media (min-width: 500px) {
+  #mainContainer{
+    width:50%;
+    border:5px gainsboro solid;
+  }
+}
+
+
 .progressbar {
-  margin: 20px 20%;
-  width: 48.8%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left:10%;
+  width: 80%;
 }
 
 .progressVisualFull {

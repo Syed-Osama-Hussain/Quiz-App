@@ -11,7 +11,7 @@ class ProgressBar extends Component {
         <div className="progressbar">
             <div className="row">
                 <div className="col-6 text-left">
-                    <span>Score: {readings[0].value}%</span>
+                    <span>Score: {readings[1].value}%</span>
                 </div>
                 
                 <div className="col-6 text-right">
