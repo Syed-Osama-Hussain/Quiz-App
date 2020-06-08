@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import StarRatings from 'react-star-ratings';
 import ProgressBar from "./progressBar";
+import QuizComplete from "./quizComplete";
 import questions from "../questions.json";
 
 
@@ -46,7 +47,11 @@ class QuizView extends Component {
 
 
     getQuestion = (currentQuestion) => {
-        
+
+        if(currentQuestion > 20){
+            this.setState({currentQuestion});
+            return;
+        }
         const currQues = questions[currentQuestion - 1];
         const question = decodeURIComponent(currQues.question);
     
@@ -148,11 +153,14 @@ class QuizView extends Component {
         return this.state.answerStatus ? <div className="ml-5"> <h5 className="resultText" style={{"fontWeight":"bold"}}> {this.state.answerStatus} </h5> <button style={{"marginLeft":"28%","height":"40px"}} className="default-btn" onClick={this.handleNext}>Next Question</button> </div> : "" 
     }
 
-  render() {
-    return (
-      <div className="container mt-5 mb-5" id="mainContainer">
-            
-            <div style={{"borderTop":"10px solid darkgray","width":(this.state.currentQuestion/20)*100 + "%" }}> </div>
+
+    getView(){
+        if(this.state.currentQuestion > 20){
+            return <QuizComplete correct={this.state.readings[1].number}/>
+        }else{
+            return( 
+            <div>
+            <div style={{"marginLeft":"-15px","borderTop":"10px solid darkgray","width":(this.state.currentQuestion/20)*100 + "%" }}> </div>
 
             <h3 className="ml-4 mt-5"> Question {this.state.currentQuestion} of 20</h3>
             <p style={{"color":"darkgray" }} className="ml-4 mb-0">{this.state.type}</p>
@@ -179,7 +187,18 @@ class QuizView extends Component {
             </div>
             
             {this.getstatus()}
-            <ProgressBar className="mt-5" readings={this.state.readings} currentQuestion={this.state.currentQuestion}/>
+            <ProgressBar style={{"marginTop":"100px"}} readings={this.state.readings} currentQuestion={this.state.currentQuestion}/>
+                
+            </div>)
+            
+        }
+    
+    }
+
+  render() {
+    return (
+      <div className="container mt-5 mb-5" id="mainContainer">
+        {this.getView()}
       </div>
     );
   }

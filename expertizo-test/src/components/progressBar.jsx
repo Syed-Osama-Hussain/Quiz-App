@@ -4,9 +4,7 @@ import '../App.css';
 class ProgressBar extends Component {
    
     render() {
-          	
       const { readings } = this.props;
-      console.log(readings)
       return (
         <div className="progressbar">
             <div className="row">
@@ -15,7 +13,7 @@ class ProgressBar extends Component {
                 </div>
                 
                 <div className="col-6 text-right">
-                    <span>Max Score: {readings[2].displayVal}%</span>
+                    <span>Max Score: {Math.round(readings[2].displayVal)}%</span>
                 </div>
             </div>
             <div
